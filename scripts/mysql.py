@@ -5,7 +5,7 @@ from unidecode import unidecode
 
 def connect():
     # Mysql connection setup. Insert your values here
-    return MySQLdb.connect(host="tund", user="cmh553", passwd="122993Heelflip", db="cmh553")
+    return MySQLdb.connect(host="tund.cefns.nau.edu", user="cmh553", passwd="122993Heelflip", db="cmh553")
 
 def insertReading(tagId):
     db = connect()

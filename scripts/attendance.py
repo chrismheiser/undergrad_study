@@ -40,7 +40,7 @@ def getOneKey():
 def initGpio():
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(8, GPIO.OUT)
-    GPIO.setup(13, GPIO.OUT)
+    GPIO.setup(11, GPIO.OUT)
 
 def main():
     GPIO.cleanup()
@@ -49,7 +49,7 @@ def main():
         while True:
             a = getOneKey()
             if 47 < a < 58:
-                readNfc(a)
+                readNfc()
     except KeyboardInterrupt:
         GPIO.cleanup()
         pass
