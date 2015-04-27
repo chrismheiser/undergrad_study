@@ -15,6 +15,7 @@
 #include "rfid.h"
 #include "bcm2835.h"
 #include "config.h"
+#include "./mysql/mysql.h"
 
 uint8_t HW_init(uint32_t spi_speed, uint8_t gpio);
 void usage(char *);
@@ -45,15 +46,29 @@ int main(int argc, char *argv[]) {
 	uint8_t use_gpio=0;
 	uint8_t gpio=255;
 	uint32_t spi_speed=10000000L;
+	MYSQL* mysql = mysql_init(NULL);
+	char record[1000];
+	char location[30];
+
+/*
+	if(!mysql_real_connect(mysql,"fdb13.runhosting.com","1857324_rfid","frmcrfid15","1857324_rfid",0,NULL,0)){
+	fprintf(stderr,"Error: %s\n",mysql_error(mysql));
+	exit(1);
+}
+*/
 
 	if (argc>1) {
-		if (strcmp(argv[1],"-d")==0) {debug=1;
-		printf("Debug mode.\n");
+		if (strcmp(argv[1],"-d")==0) {debug = 1;
 		}else{
 			usage(argv[0]);
 			exit(1);
 		}
 	}
+
+	printf("Enter location name:\n");
+	scanf("%s",&location);
+
+	printf("%s\n",location);
 
 	if (open_config_file(config_file)!=0) {
 		if (debug) {fprintf(stderr,"Can't open config file!");}
@@ -114,6 +129,18 @@ int main(int argc, char *argv[]) {
 		}
 		*(p++)=']';
 		*(p++)=0;
+
+		
+/*
+		snprintf(record,sizeof(record), "INSERT INTO 'a6554686_rfid','Loc_Info' ('SN', 'MacAddr', 'Time') VALUES (%i, mymac, NOW())",SN);		
+
+		if(mysql_query(mysql,record)==0){
+			printf("Record added");
+		}else{
+			printf("Record failed to insert into table");
+		}
+*/
+
 
 		if (use_gpio) bcm2835_gpio_write(gpio, HIGH);
 		//ищем SN в конфиге
