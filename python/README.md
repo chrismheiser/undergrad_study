@@ -1,10 +1,10 @@
-Attendance-python
+Attendance system
 ==============
 
 Small program for basic interface and logging of NFC tags on the Raspberry Pi
 
 
-Pre Requisites
+Required
 ==============
 
 You will need to install SPI-Py from lthiery from the following address:
@@ -20,10 +20,10 @@ More Info
 For more information visit: http://www.instructables.com/id/Attendance-system-using-Raspberry-Pi-and-NFC-Tag-r/
 
 
-Usage
+Execute
 ==============
 
-Just run the following command:
+Run the following command:
 
 sudo python attendance.py 
 
